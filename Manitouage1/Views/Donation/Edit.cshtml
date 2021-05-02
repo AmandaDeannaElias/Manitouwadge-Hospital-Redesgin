@@ -1,0 +1,98 @@
+﻿@model Manitouage1.Models.ViewModels.UpdateDonation
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+
+<!--just added to see if this works-->
+@using (Html.BeginForm("Edit", "Donation", FormMethod.Post, new { id = Model.donation.donationId }))
+
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Donation</h4>
+        <hr />
+        <!--validation already done-->
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <!--edited existing code with adding donation table (MAKE SURE IT IS THE SAME AS THE VIEW MODEL) then grabing the column-->
+        @Html.HiddenFor(model => model.donation.donationId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.donation.firstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.donation.firstName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.donation.firstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.donation.lastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.donation.lastName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.donation.lastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.donation.email, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.donation.email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.donation.email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.donation.phoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.donation.phoneNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.donation.phoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.donation.amount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.donation.amount, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.donation.amount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.donation.EventId, "Events", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <!--REFERENCE CODE:: varsity with auth player create view-->
+                <!--in edit view event id needs to match donation event id-->
+                <select name="EventId">
+                    @foreach (var Event in Model.allevents)
+                    {
+                        <option value="@Event.EventId"
+                                @if (Event.EventId == Model.donation.EventId) { <text> selected</text>}>
+                            @Event.Title
+                        </option>
+                    }
+                </select>
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+        }
+    </div>
+}
+
+    <div>
+        @Html.ActionLink("Back to List", "List")
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

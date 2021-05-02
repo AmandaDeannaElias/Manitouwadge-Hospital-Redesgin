@@ -1,0 +1,68 @@
+﻿@model Manitouage1.Models.ViewModels.ListDonation
+
+@{
+    ViewBag.Title = "List";
+    //added in layout THIS WAS ALL SANDRA!!!! 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>All Donations</h2>
+<!--only for admin view-->
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <!--add in if statment if it is admin-->
+        <!--help from miho-->
+        <th>
+            @Html.DisplayNameFor(model => model.Event.Title)
+        </th>
+        <th>
+           First Name
+        </th>
+        <th>
+            Last Name
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Phone Number
+        </th>
+        <th>
+            Donation Amount
+        </th>
+        <th></th>
+    </tr>
+    <!--add the view model all donations-->
+@foreach (var item in Model.alldonations) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.amount)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.donationId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.donationId }) |
+            @Html.ActionLink("Delete", "DeleteConfirm", new { id=item.donationId })
+        </td>
+    </tr>
+}
+
+</table>

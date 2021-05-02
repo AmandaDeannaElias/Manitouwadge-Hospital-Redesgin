@@ -1,0 +1,96 @@
+﻿@model Manitouage1.Models.DepartmentDto
+
+@{
+    ViewBag.Title = "Delete Confirm";
+}
+
+<div class="col-12 pl-5 pr-5">
+    <div>
+        @Html.ActionLink("Back to List", "List")
+    </div>
+
+    <h2 class="mt-3 mb-3">Delete Confirm</h2>
+
+    <h3 class="mb-5">Are you sure to delete this job posting?</h3>
+
+    <div class="col-md-12 my-3">
+        <div class="row">
+            <div class="col-md-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.departmentName)
+            </div>
+
+            <div>
+                @Html.DisplayFor(model => model.departmentName)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 my-3">
+        <div class="row">
+            <div class="col-md-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.email)
+            </div>
+
+            <div>
+                @Html.DisplayFor(model => model.email)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 my-3">
+        <div class="row">
+            <div class="col-md-3 font-weight-bold">
+
+                @Html.DisplayNameFor(model => model.phone)
+            </div>
+
+            <div>
+                @Html.DisplayFor(model => model.phone)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 my-3">
+        <div class="row">
+            <div class="col-md-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.fax)
+            </div>
+
+            <div>
+                @Html.DisplayFor(model => model.fax)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 my-3">
+        <div class="row">
+            <div class="col-md-3 font-weight-bold">
+
+                @Html.DisplayNameFor(model => model.extension)
+            </div>
+
+            <div>
+                @Html.DisplayFor(model => model.extension)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 my-3">
+        <div class="row">
+            <div class="col-md-3 font-weight-bold">
+
+                @Html.DisplayNameFor(model => model.category)
+            </div>
+
+            <div>
+                @Html.DisplayFor(model => model.category)
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Delete", "Department", new { id = Model.departmentId }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-info my-2 my-sm-0" />
+
+        </div>
+       
+    }
+</div>

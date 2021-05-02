@@ -1,0 +1,114 @@
+﻿@model Manitouage1.Models.ViewModels.ListJobPostings
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@if (Model.isadmin)
+{
+
+    <h2>Job Postings</h2>
+
+    @Html.ActionLink("Create New", "Create")
+}
+
+@if (!Model.isadmin)
+{
+    <h2>Opportunities</h2>
+    <p>Thank you for your interest in the Manitouwage Hospital Team!</p>
+    <p>Manitaouwae Hospital is a great place to work. We are located in the heart of the Canadian Shield, roughly located 400 km east of Thunder Bay and 425km west of Sault Site, Marie.</p>
+    <p>SHM has Exemptly Standing with Accreditaion Canada.</p>
+    <p>We are currently recruiting:</p>
+}
+<table class="table">
+    <tr>
+        @if (Model.isadmin)
+        {
+            <th>
+                Job Posting Id
+            </th>
+
+            <th>
+                Job Number
+            </th>
+            <th>
+                Job Title
+            </th>
+            <th>
+                Job Type
+            </th>
+            @*
+            <th>
+                Job Description
+            </th>
+            *@
+            <th>
+                Salary
+            </th>
+            <th>
+                Closing Date
+            </th>
+            <th>
+                Department
+            </th>
+            <th></th>
+
+        }
+    </tr>
+
+    @foreach (var item in Model.jobpostings)
+    {
+<tr>
+    @if (Model.isadmin)
+    {
+        <td>
+            @Html.DisplayFor(modelItem => item.jobPostingId)
+        </td>
+    }
+    <td>
+        @Html.DisplayFor(modelItem => item.jobNumber)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.jobTitle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.jobType)
+    </td>
+    @if (Model.isadmin)
+    {
+        @*
+        <td>
+            @Html.Raw(item.jobDescription)
+        </td>
+        *@
+        <td>
+            @Html.DisplayFor(modelItem => item.salary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.closingDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.departmentId) - @Html.DisplayFor(modelItem => item.departmentName)
+        </td>
+
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.jobPostingId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.jobPostingId }) |
+            @Html.ActionLink("Delete", "DeleteConfirm", new { id = item.jobPostingId })
+        </td>
+    }
+    @if (!Model.isadmin)
+    {
+        <td>
+
+            @Html.ActionLink("Details", "Details", new { id = item.jobPostingId })
+
+        </td>
+    }
+</tr>
+    }
+
+</table>

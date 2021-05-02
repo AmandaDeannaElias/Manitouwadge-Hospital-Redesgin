@@ -1,0 +1,119 @@
+﻿@model Manitouage1.Models.JobPostingDto
+
+@{
+    ViewBag.Title = "DeleteConfirm";
+}
+
+
+<div class="col-12 pl-5 pr-5">
+    <div>
+        @Html.ActionLink("Back to List", "List")
+    </div>
+
+    <h2 class="mt-3 mb-3">Delete Confirm</h2>
+
+    <h3 class="mb-5">Are you sure to delete this job posting?</h3>
+
+    <div class="col-md-12 my-3">
+        <div class="row">
+            <div class="col-md-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.departmentName)
+            </div>
+
+            <div>
+                @Html.DisplayFor(model => model.departmentName)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 my-3">
+        <div class="row">
+            <div class="col-md-3 font-weight-bold">
+
+                @Html.DisplayNameFor(model => model.jobNumber)
+            </div>
+
+            <div>
+                @Html.DisplayFor(model => model.jobNumber)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 my-3">
+        <div class="row">
+            <div class="col-md-3 font-weight-bold">
+
+                @Html.DisplayNameFor(model => model.jobTitle)
+            </div>
+
+            <div>
+                @Html.DisplayFor(model => model.jobTitle)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 my-3">
+        <div class="row">
+            <div class="col-md-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.jobType)
+            </div>
+
+            <div>
+                @Html.DisplayFor(model => model.jobType)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 my-3">
+        <div class="row">
+            <div class="col-md-3 font-weight-bold">
+
+                @Html.DisplayNameFor(model => model.jobDescription)
+            </div>
+
+            <div>
+                @Html.Raw(Model.jobDescription)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 my-3">
+        <div class="row">
+            <div class="col-md-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.salary)
+            </div>
+
+            <div>
+                @Html.DisplayFor(model => model.salary)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 my-3">
+        <div class="row">
+            <div class="col-md-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.closingDate)
+            </div>
+
+            <div>
+                @Html.DisplayFor(model => model.closingDate)
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12 my-3">
+        <div class="row">
+            <div class="col-md-3 font-weight-bold">
+                @Html.DisplayNameFor(model => model.departmentName)
+            </div>
+
+            <div>
+                @Html.DisplayFor(model => model.departmentName)
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("Delete", "JobPosting", new { id = Model.jobPostingId }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color mt-3">
+            <input type="submit" value="Delete" class="btn btn-info my-2 my-sm-0" />
+
+        </div>
+        
+    }
+</div>

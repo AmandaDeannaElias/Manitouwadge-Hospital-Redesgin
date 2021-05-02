@@ -1,0 +1,121 @@
+﻿@model Manitouage1.Models.ViewModels.ViewInvoice
+
+@{
+  var invoice = Model.invoiceDto;
+  var statusCreated = Manitouage1.Models.Invoice.Status.Created;
+  var statusPaid = Manitouage1.Models.Invoice.Status.Paid;
+  var products = Model.invoiceProducts;
+  var user = Model.applicationUser;
+  var totals = Model.totals;
+}
+
+<div class="ml-3">
+  <h4>Invoice</h4>
+  <hr />
+  <dl class="dl-horizontal">
+    <dt>
+      @Html.DisplayNameFor( model => invoice.invoiceId )
+    </dt>
+    <dd>
+      @Html.DisplayFor( model => invoice.invoiceId )
+    </dd>
+
+    <dt>Client</dt>
+    <dd>
+      @Html.DisplayFor( model => user.Email )
+    </dd>
+    @if( invoice.status != statusPaid ) {
+      <dt></dt>
+      <dd>
+        @Html.ActionLink( "Update Client", "EditClient", new {
+          id = invoice.invoiceId
+        } )
+      </dd>
+    }
+
+    <dt>
+      @Html.DisplayNameFor( model => invoice.created )
+    </dt>
+    <dd>
+      @Html.DisplayFor( model => invoice.created )
+    </dd>
+
+    @if( invoice.status != statusCreated ) {
+      <dt>
+        @Html.DisplayNameFor( model => invoice.issued )
+      </dt>
+      <dd>
+        @Html.DisplayFor( model => invoice.issued )
+      </dd>
+      if( invoice.status == statusPaid ) {
+        <dt>
+          @Html.DisplayNameFor( model => invoice.paid )
+        </dt>
+        <dd>
+          @Html.DisplayFor( model => invoice.paid )
+        </dd>
+      }
+    }
+    @if( invoice.status != statusPaid ) {
+      <dt></dt>
+      <dd>
+        @Html.ActionLink( "Update Status", "EditStatus", new {
+          id = invoice.invoiceId
+        } )
+      </dd>
+    }
+  </dl>
+</div>
+<hr />
+<h4 class="ml-3">Items</h4>
+<table class="table mx-3" id="productsTable">
+  <tr>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Cost</th>
+  </tr>
+
+  @foreach( var item in products ) {
+    <tr>
+      <td>
+        @Html.DisplayFor( modelItem => item.productName )
+      </td>
+      <td>
+        @Html.DisplayFor( modelItem => item.quantity )
+      </td>
+      <td>
+        @Html.DisplayFor( modelItem => item.cost )
+      </td>
+    </tr>
+  }
+  <tr>
+    <td></td>
+    <td class="text-right font-weight-bold">@Html.DisplayNameFor( model => totals.subTotal )</td>
+    <td>@Html.DisplayFor( model => totals.subTotal )</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="text-right font-weight-bold">@Html.DisplayNameFor( model => totals.taxes )</td>
+    <td>@Html.DisplayFor( model => totals.taxes )</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td class="text-right font-weight-bold">@Html.DisplayNameFor( model => totals.total )</td>
+    <td>@Html.DisplayFor( model => totals.total )</td>
+  </tr>
+</table>
+@if( invoice.status != statusPaid ) {
+  @Html.ActionLink( "Update Products", "EditProducts", new {
+    id = invoice.invoiceId
+  } )
+}
+<p class="mt-3">
+  @if( invoice.status != statusPaid ) {
+    <span>
+      @Html.ActionLink( "Edit", "Edit", new {
+        id = invoice.invoiceId
+      } ) |
+    </span>
+  }
+  @Html.ActionLink( "Back to List", "Index" )
+</p>

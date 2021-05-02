@@ -1,0 +1,66 @@
+﻿@model Manitouage1.Models.ViewModels.ShowDonation
+<!--admin functionality wont need layout -->
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Donation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.events.Title)
+        </dt>
+
+        <dd><!--NOT SHOWING!!! -->
+            @Html.DisplayFor(model => model.events.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.donation.firstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.donation.firstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.donation.lastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.donation.lastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.donation.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.donation.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.donation.phoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.donation.phoneNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.donation.amount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.donation.amount)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.donation.donationId }) |
+    @Html.ActionLink("Back to List", "List")
+</p>

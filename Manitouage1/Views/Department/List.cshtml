@@ -1,0 +1,89 @@
+﻿@model Manitouage1.Models.ViewModels.ListDepartments
+
+@*
+    @{
+        ViewBag.Title = "View";
+    }
+*@
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h2>Departments</h2>
+@if (Model.isadmin)
+{
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+}
+    <table class="table">
+        <tr>
+            @if (Model.isadmin)
+            {
+                <th>
+                    Department Id
+                </th>
+            }
+                <th>
+                    Department Name
+                <th>
+                    Email
+                </th>
+                <th>
+                    Phone Number
+                </th>
+                <th>
+                    Fax
+                </th>
+                <th>
+                    Extension
+                </th>
+                <th>
+                    Category
+                </th>
+                <th></th>
+            </tr>
+
+        @foreach (var item in Model.departments)
+        {
+        <tr>
+            @if (Model.isadmin)
+            {
+            <td>
+                @Html.DisplayFor(modelItem => item.departmentId)
+            </td>
+            }   
+            <td>
+                @Html.DisplayFor(modelItem => item.departmentName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.fax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.extension)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.category)
+            </td>
+            @if (Model.isadmin)
+            {
+                <td>
+
+                    @Html.ActionLink("Edit", "Edit", new { id = item.departmentId }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.departmentId }) |
+                    @Html.ActionLink("Delete", "DeleteConfirm", new { id = item.departmentId })
+                </td>
+            }
+        </tr>
+        }
+
+    </table>

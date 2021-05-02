@@ -1,0 +1,107 @@
+﻿@model Manitouage1.Models.ViewModels.UpdateInvoice
+
+@{
+    var invoice = Model.invoiceDto;
+    var products = Model.productDtos;
+    var users = Model.applicationUsers;
+    var totals = Model.totals;
+}
+
+@using (Html.BeginForm( "Create", "Invoices", FormMethod.Post, new { name = "invoiceForm", id = "invoiceForm" } ))
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+  <h4>Invoice</h4>
+  <hr />
+  @Html.ValidationSummary( true, "", new {
+    @class = "text-danger"
+  } )
+  <div class="form-group">
+    @Html.LabelFor( model => invoice.created, htmlAttributes: new {
+      @class = "control-label col-md-2"
+    } )
+    <div class="col-md-10">
+      @Html.EditorFor( model => invoice.created, new {
+         htmlAttributes = new {
+           @class = "form-control",
+           name = "created",
+           id = "created"
+         }
+       } )
+      @Html.ValidationMessageFor( model => invoice.created, "", new {
+        @class = "text-danger"
+      } )
+    </div>
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor( model => invoice.userId, "Client", htmlAttributes: new {
+      @class = "control-label col-md-2"
+    } )
+    <div class="col-md-10">
+      @Html.DropDownListFor(
+        model => invoice.userId,
+        new SelectList( users.Select( i => new { Text = i.Id, Value = i.Email } ), "Text", "Value" ),
+        "Select",
+        htmlAttributes: new {
+          @class = "form-control",
+          name = "userId",
+          id = "userId"
+        }
+      )
+
+      @Html.ValidationMessageFor( model => invoice.userId, "", new {
+         @class = "text-danger",
+         name = "userIdError",
+         id = "userIdError"
+       } )
+    </div>
+  </div>
+
+  <div class="form-group">
+    @Html.LabelFor( model => products, "Add Product", htmlAttributes: new {
+      @class = "control-label col-md-2"
+    } )
+    <div class="col-md-10">
+      @Html.DropDownListFor(
+        model => products,
+        new SelectList( products.Select( i => new { Text = i.productId, Value = i.productName } ), "Text", "Value" ),
+        "",
+        htmlAttributes: new {
+          @id = "productsSelect",
+          @class = "form-control"
+        }
+      )
+
+      @Html.ValidationMessageFor( model => products, "", new {
+        @class = "text-danger"
+      } )
+    </div>
+    <div>
+      <table class="table" id="productsTable" style="margin-top:1em">
+        <tr>
+          <th>Name</th>
+          <th>Quantity</th>
+          <th>Cost</th>
+          <th></th>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+      <input type="submit" value="Create" class="btn btn-primary" name="invoiceSubmit" />
+    </div>
+  </div>
+</div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index" )
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

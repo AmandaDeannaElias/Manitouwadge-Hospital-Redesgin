@@ -1,0 +1,73 @@
+﻿@model Manitouage1.Models.ViewModels.ListEventxDonation
+
+@{
+    ViewBag.Title = "View";
+}
+
+<h2>Events</h2>
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+
+
+<table class="table">
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            DateTime
+        </th>
+        <th>
+            Location
+        </th>
+        <th>
+            Duration
+        </th>
+        <th>
+            ContactPerson
+        </th>
+        <!--<th>
+        Number of Donations
+        </th>-->
+        <th>
+            Options
+        </th>
+    </tr>
+
+    @foreach (var events in Model.events)
+    {
+<tr>
+
+    <td>
+        @Html.DisplayFor(modelItem => events.Title)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => events.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => events.DateTime)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => events.Location)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => events.Duration)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => events.ContactPerson)
+    </td>
+    <td>
+        <span style="margin-right:5px;">@Html.ActionLink("Edit", "Edit", new { id = events.EventId })</span>
+        @Html.ActionLink("Details", "Details", new { id = events.EventId })
+        @Html.ActionLink("Delete", "DeleteConfirm", new { id = events.EventId })
+
+    </td>
+</tr>
+    }
+
+</table>
